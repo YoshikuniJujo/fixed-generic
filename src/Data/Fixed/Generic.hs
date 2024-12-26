@@ -3,7 +3,7 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
 {-# OPTIONS_GHC -Wall -fno-warn-tabs #-}
 
-module Data.Fixed.Generic where
+module Data.Fixed.Generic (F(..), showF) where
 
 import GHC.Internal.Read
 import GHC.Internal.Text.ParserCombinators.ReadPrec
@@ -24,9 +24,6 @@ instance (Typeable k, Typeable a, Data n) => Data (F (a :: k) n) where
 	gunfold k z _ = k (z MkF)
 	dataTypeOf _ = tyF
 	toConstr _ = conMkF
-
-withType :: (Proxy (a :: k) -> f) -> f
-withType foo = foo Proxy
 
 withResolution :: forall k (a :: k) f . HasResolution a => (Integer -> f) -> f
 withResolution foo = foo . resolution $ Proxy @a
