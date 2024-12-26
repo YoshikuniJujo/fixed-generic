@@ -11,7 +11,7 @@ import GHC.Internal.Text.Read.Lex
 import Data.Data
 import Data.Fixed
 
-newtype F (a :: k) n = MkF n deriving (Eq, Ord)
+newtype F (a :: k) n = MkF n deriving (Eq, Ord, Bounded)
 
 tyF :: DataType
 tyF = mkDataType "Data.Fixed.Generic.F" [conMkF]
