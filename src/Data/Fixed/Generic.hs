@@ -3,7 +3,7 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
 {-# OPTIONS_GHC -Wall -fno-warn-tabs #-}
 
-module Data.Fixed.Generic (F(..), showF) where
+module Data.Fixed.Generic (F(..), showF, changeUnit) where
 
 import GHC.Internal.Read
 import GHC.Internal.Text.ParserCombinators.ReadPrec
@@ -114,3 +114,6 @@ instance (HasResolution a, Integral n) => Read (F a n) where
 	readPrec = readNumber convertF
 	readListPrec = readListPrecDefault
 	readList = readListDefault
+
+changeUnit :: F a n -> F a' n
+changeUnit (MkF a) = MkF a
